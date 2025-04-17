@@ -19,7 +19,8 @@ class AnimalController extends Controller
      */
     public function index()
     {
-        //
+        $animals = $this->animal->all();
+        return view('animals', ['animals' => $animals]);
     }
 
     /**
@@ -42,10 +43,10 @@ class AnimalController extends Controller
         ]);
 
         if($created){
-            return redirect()->route('animals.create')->with('message', 'Successfully create');
+            return redirect()->route('animals.index')->with('message', 'Successfully create');
         }
 
-        return redirect()->route('animals.create')->with('message', 'Error create');
+        return redirect()->route('animals.index')->with('message', 'Error create');
     }
 
 
