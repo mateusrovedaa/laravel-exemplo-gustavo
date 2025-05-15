@@ -7,8 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Animal extends Model
 {
     protected $fillable = [
-        'nome', 
-        'especie', 
+        'nome',
+        'especie',
         'idade'
     ];
+
+    public function celeiro()
+    {
+        return $this->belongsTo(Celeiro::class);
+    }
 }

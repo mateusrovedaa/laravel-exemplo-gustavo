@@ -10,7 +10,7 @@
 
 <ul>
     @foreach ($animals as $animal)
-      <li>{{ $animal->nome }} | {{ $animal->especie }} | {{ $animal->idade }} </li>  
+      <li>{{ $animal->nome }} | {{ $animal->especie }} | {{ $animal->idade }} | {{ $animal->celeiro->nome ?? 'Sem celeiro' }} </li>  
     @endforeach
 </ul>
 

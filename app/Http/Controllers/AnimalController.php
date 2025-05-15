@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Animal;
+use App\Models\Celeiro;
 use Illuminate\Http\Request;
 
 class AnimalController extends Controller
 {
 
     public readonly Animal $animal;
+    public readonly Celeiro $celeiro;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->animal = new Animal();
+        $this->celeiro = new Celeiro();
     }
 
     /**
@@ -19,7 +23,7 @@ class AnimalController extends Controller
      */
     public function index()
     {
-        $animals = $this->animal->all();
+        $animals = $this->animal->with('celeiro')->get();
         return view('animals', ['animals' => $animals]);
     }
 
@@ -28,7 +32,8 @@ class AnimalController extends Controller
      */
     public function create()
     {
-        return view('animal_create');
+        $celeiros = $this->celeiro->all();
+        return view('animal_create', compact('celeiros'));
     }
 
     /**
@@ -40,9 +45,10 @@ class AnimalController extends Controller
             'nome' => $request->input('nome'),
             'especie' => $request->input('especie'),
             'idade' => $request->input('idade'),
+            'celeiro_id' => $request->input('celeiro_id'),
         ]);
 
-        if($created){
+        if ($created) {
             return redirect()->route('animals.index')->with('message', 'Successfully create');
         }
 
