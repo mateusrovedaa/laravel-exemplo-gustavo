@@ -16,4 +16,9 @@ class Animal extends Model
     {
         return $this->belongsTo(Celeiro::class);
     }
+
+    public function vacinas()
+    {
+        return $this->belongsToMany(Vacina::class);
+    }
 }

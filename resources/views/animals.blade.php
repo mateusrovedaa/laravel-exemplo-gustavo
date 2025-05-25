@@ -1,17 +1,21 @@
 @extends('main')
 
 @section('content')
+    <a href="{{ route('animals.create') }}">Create</a>
 
-<a href="{{ route('animals.create') }}">Create</a>
+    <hr>
 
-<hr>
+    <h2>Animals</h2>
 
-<h2>Animals</h2>
-
-<ul>
-    @foreach ($animals as $animal)
-      <li>{{ $animal->nome }} | {{ $animal->especie }} | {{ $animal->idade }} | {{ $animal->celeiro->nome ?? 'Sem celeiro' }} </li>  
-    @endforeach
-</ul>
-
+    <ul>
+        @foreach ($animals as $animal)
+            <li>{{ $animal->nome }} | {{ $animal->especie }} | {{ $animal->idade }} |
+                {{ $animal->celeiro->nome ?? 'Sem celeiro' }}
+            </li>
+            @foreach ($animal->vacinas as $vacina)
+                <li> - {{ $vacina->nome }}</li>
+            @endforeach
+          </br>
+        @endforeach
+    </ul>
 @endsection
